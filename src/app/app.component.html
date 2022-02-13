@@ -1,0 +1,50 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<form [formGroup]="formGroup" (submit)="saveForm(formGroup)">
+  <div>
+    name: <input formControlName="name" />
+    <br />
+    <i style="color: red;" *ngIf="formGroup?.controls?.name?.errors?.required">
+      istifadeci adi doldurulmalidi
+    </i>
+    <br />
+    <i
+      style="color: red;"
+      *ngIf="(formGroup?.controls?.name?.errors?.minlength?.requiredLength ||
+           formGroup?.controls?.name?.errors?.maxlength?.requiredLength) "
+    >
+      istifadeci adi
+
+      <span
+        *ngIf="formGroup?.controls?.name?.errors?.minlength?.requiredLength"
+      >
+        {{formGroup?.controls?.name?.errors?.minlength?.requiredLength}}
+        karakterden az
+      </span>
+      <span
+        *ngIf="formGroup?.controls?.name?.errors?.maxlength?.requiredLength"
+      >
+        {{formGroup?.controls?.name?.errors?.maxlength?.requiredLength}}
+        karakterden chox
+      </span>
+      olmamali hazirda
+      {{formGroup?.controls?.name?.errors?.minlength?.actualLength}} karakter
+      var
+    </i>
+    <i *ngIf="formGroup?.controls?.name?.errors?.blacklist">
+      <span style="color: red;">g herifi olmaz</span>
+    </i>
+    <br />
+    <i *ngIf="formGroup?.controls?.name?.errors?.whiteSpace">
+      <span style="color: red;">Bosluq Buraxilmaz</span>
+    </i>
+    <i *ngIf="formGroup?.controls?.name?.errors?.isUserNameExit">
+      <span style="color: red;">Bu ad istifade Edilib</span>
+    </i>
+  </div>
+
+  <div>age: <input formControlName="age" /></div>
+  <div>
+    <button type="submit">Submit</button>
+    <button (click)="createRandomUser()">Create User Random</button>
+  </div>
+</form>
